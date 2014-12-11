@@ -5,7 +5,7 @@
             <%= image_tag item.image.url(:thumb) %>
             <div class="panel-body">
                 <%= item.description %>
-                <%= item.user.email if item.user %>
+                <%= item.user.name if item.user %>
                 <%= link_to 'Show', item %>
               <% if item.user == current_user %>
                 <%= link_to 'Edit', edit_item_path(item) %>

@@ -13,20 +13,17 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = current_user.Items.build
+    @item = current_user.items.build
   end
 
   def edit
   end
 
   def create
-    @item = current_user.Items.build
-    if @item.save
+    @item = current_user.Items.build(items_params)
+    @item.save
       redirect_to @item, notice: 'Item was successfully created.'
-    else
-      render action: 'new'
     end
-  end
 
   def update
     if @item.update(item_params)
@@ -54,6 +51,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:description, :image)
+      params.require(:item).permit(:description, )
     end
 end
