@@ -5,57 +5,54 @@ class ItemsController < ApplicationController
   
   respond_to :html
 
-  def index
-    @items = Item.all
-    respond_with(@items)
+    def index
+    @Items = Item.all
   end
 
   def show
-    respond_with(@item)
   end
 
   def new
-    @item = current_user.items.build
-    respond_with(@item)
+    @item = current_user.Items.build
   end
 
   def edit
   end
 
   def create
-    @item = current_user.items.build(item_params)
+    @item = current_user.Items.build
     if @item.save
-      redirect_to @item, notice: 'Item was successfully created'
-    respond_with(@item)
+      redirect_to @item, notice: 'Item was successfully created.'
     else
-    render action: 'new'
+      render action: 'new'
     end
   end
 
   def update
     if @item.update(item_params)
-      rediect_to @item, notice: 'Item was successfully updated'
-      respond_with(@item)
+      redirect_to @item, notice: 'Item was successfully updated.'
     else
-      render action 'edit'
+      render action: 'edit'
     end
   end
 
   def destroy
-    @item.destroy
-    respond_with(@item)
+    @Item.destroy
+    redirect_to Items_url
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = Item.find(params[:id])
+      @item = item.find(params[:id])
     end
 
-  def correct_user
-    @item = current_user.items.find_by(id: params[:id])
-    redirect_to items_path, notice: "Not authorized to edit this item" if @item.nil? 
-  end
+    def correct_user
+      @item = current_user.Items.find_by(id: params[:id])
+      redirect_to Items_path, notice: "Not authorized to edit this item" if @item.nil?
+    end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:description, :image)
     end
