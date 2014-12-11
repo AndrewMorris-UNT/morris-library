@@ -3,6 +3,7 @@
 <p>
   <strong>Description:</strong>
   <%= @item.description %>
+  <%= @item.user.name if item.user %>
 </p>
 
 <% if @item.user == current_user %>
