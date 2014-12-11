@@ -27,21 +27,18 @@
           <%= f.text_field :description, class: "form-control" %>
         </div>
         
-        
-          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            Dropdown
+        <button class="btn btn-default dropdown-toggle" type="button" id="Type of Item" data-toggle="dropdown" aria-expanded="true">
+            Type of Item
             <span class="caret"></span>
           </button>
-          <%= f.label :type_of_item %><br>
-          <%= f.text_field :description, class: "form-control" %><div class="dropdown">
+          <div class="dropdown">
           <ul class="dropdown-menu" role="menu" aria-labelledby="Type of Item">
             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Book</a<li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">DVD</a<li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CD</a<li>
           </ul>
-          
         </div>
-
+<br>
         <div class="form-group">
           <%= f.submit class: "btn btn-primary" %>
         </div>
