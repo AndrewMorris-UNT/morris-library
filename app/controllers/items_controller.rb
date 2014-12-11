@@ -23,14 +23,22 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = current_user.items.build(item_params[:entry])
-    @item.save
+    @item = current_user.items.build(item_params)
+    if @item.save
+      redirect_to @item, notice: 'Item was successfully created'
     respond_with(@item)
+    else
+    render action: 'new'
+    end
   end
 
   def update
-    @item.update(item_params)
-    respond_with(@item)
+    if @item.update(item_params)
+      rediect_to @item, notice: 'Item was successfully updated'
+      respond_with(@item)
+    else
+      render action 'edit'
+    end
   end
 
   def destroy
@@ -44,8 +52,8 @@ class ItemsController < ApplicationController
     end
 
   def correct_user
-    @item = current_user.entries.find_by(id: params[:id])
-    redirect_to items_path, notice: "Not authorized to edit this entry" if @item.nil? 
+    @item = current_user.items.find_by(id: params[:id])
+    redirect_to items_path, notice: "Not authorized to edit this item" if @item.nil? 
   end
 
     def item_params
